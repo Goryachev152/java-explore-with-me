@@ -13,33 +13,33 @@ import java.util.List;
 @Repository
 public interface StatsRepository extends JpaRepository<Viewing, Long> {
 
-    @Query("select new ru.yandex.practicum.ResultStatsDto(s.app, s.uri, count(s.id)) " +
-            "from Viewing as s " +
-            "where s.timestamp between :start and :end " +
-            "group by s.app, s.uri " +
-            "order by count(s.id) desc")
+    @Query("select new ru.yandex.practicum.ResultStatsDto(v.app, v.uri, count(v.id)) " +
+            "from Viewing as v " +
+            "where v.viewingData between :start and :end " +
+            "group by v.app, v.uri " +
+            "order by count(v.id) desc")
     List<ResultStatsDto> findAllUrisFalseUnique(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 
-    @Query("select new ru.yandex.practicum.ResultStatsDto(s.app, s.uri, count(distinct s.ip)) " +
-            "from Viewing as s " +
-            "where s.timestamp between :start and :end " +
-            "group by s.app, s.uri " +
-            "order by count(distinct s.ip) desc")
+    @Query("select new ru.yandex.practicum.ResultStatsDto(v.app, v.uri, count(distinct v.ip)) " +
+            "from Viewing as v " +
+            "where v.viewingData between :start and :end " +
+            "group by v.app, v.uri " +
+            "order by count(distinct v.ip) desc")
     List<ResultStatsDto> findAllUrisTrueUnique(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 
-    @Query("select new ru.yandex.practicum.ResultStatsDto(s.app, s.uri, count(s.id)) " +
-            "from Viewing as s " +
-            "where s.timestamp between :start and :end and s.uri in :uris " +
-            "group by s.app, s.uri " +
-            "order by count(distinct s.id) desc")
+    @Query("select new ru.yandex.practicum.ResultStatsDto(v.app, v.uri, count(v.id)) " +
+            "from Viewing as v " +
+            "where v.viewingData between :start and :end and v.uri in :uris " +
+            "group by v.app, v.uri " +
+            "order by count(distinct v.id) desc")
     List<ResultStatsDto> findByListUrisFalseUnique(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end,
                                                    @Param("uris") List<String> uris);
 
-    @Query("select new ru.yandex.practicum.ResultStatsDto(s.app, s.uri, count(distinct s.ip)) " +
-            "from Viewing as s " +
-            "where s.timestamp between :start and :end and s.uri in :uris " +
-            "group by s.app, s.uri " +
-            "order by count(distinct s.ip) desc")
+    @Query("select new ru.yandex.practicum.ResultStatsDto(v.app, v.uri, count(distinct v.ip)) " +
+            "from Viewing as v " +
+            "where v.viewingData between :start and :end and v.uri in :uris " +
+            "group by v.app, v.uri " +
+            "order by count(distinct v.ip) desc")
     List<ResultStatsDto> findByListUrisTrueUnique(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end,
                                                   @Param("uris") List<String> uris);
 }

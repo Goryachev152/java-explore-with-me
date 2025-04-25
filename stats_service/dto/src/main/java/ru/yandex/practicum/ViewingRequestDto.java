@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder(toBuilder = true)
 public class ViewingRequestDto {
-    String app;
-    String uri;
-    String ip;
+    private String app;
+    private String uri;
+    private String ip;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     LocalDateTime timestamp;
 }

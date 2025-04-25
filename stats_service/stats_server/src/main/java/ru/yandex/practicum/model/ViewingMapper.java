@@ -9,7 +9,7 @@ public class ViewingMapper {
                 .app(viewingRequestDto.getApp())
                 .uri(viewingRequestDto.getUri())
                 .ip(viewingRequestDto.getIp())
-                .timestamp(viewingRequestDto.getTimestamp())
+                .viewingData(viewingRequestDto.getTimestamp())
                 .build();
     }
 }

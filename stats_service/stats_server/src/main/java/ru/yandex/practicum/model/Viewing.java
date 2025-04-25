@@ -26,13 +26,13 @@ import java.time.LocalDateTime;
 public class Viewing {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
     @Column(name = "app")
-    String app;
+    private String app;
     @Column(name = "uri")
-    String uri;
+    private String uri;
     @Column(name = "ip")
-    String ip;
-    @Column(name = "timestamp")
-    LocalDateTime timestamp;
+    private String ip;
+    @Column(name = "viewing_data")
+    private LocalDateTime viewingData;
 }
