@@ -316,12 +316,7 @@ public class EventServiceImpl implements EventService {
         ViewingRequestDto viewingRequestDto = new ViewingRequestDto("ewm-main-service",
                 "/events/" + eventId, httpServletRequest.getRemoteAddr(), LocalDateTime.now());
         statsClient.addHit(viewingRequestDto);
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
-        Long views = getViews(event.getPublishedOn(), LocalDateTime.now(),
+        Long views = getViews(event.getPublishedOn().minusSeconds(1), LocalDateTime.now(),
                 List.of("/events/" + eventId), true);
         return eventMapper.toFullDto(event, views);
     }
