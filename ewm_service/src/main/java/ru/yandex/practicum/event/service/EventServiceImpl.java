@@ -53,6 +53,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Slf4j
 public class EventServiceImpl implements EventService {
+    public static final int MIN_HOURS_UNTIL_EVENT = 2;
+    private static final int MIN_HOURS_BEFORE_START = 1;
+
     private final EventRepository eventRepository;
     private final LocationRepository locationRepository;
     private final UserRepository userRepository;
@@ -65,7 +68,7 @@ public class EventServiceImpl implements EventService {
     @Transactional
     @Override
     public EventFullDto createEvent(NewEventDto newEventDto, Long userId) {
-        if (newEventDto.getEventDate().isBefore(LocalDateTime.now().plusHours(2))) {
+        if (newEventDto.getEventDate().isBefore(LocalDateTime.now().plusHours(MIN_HOURS_UNTIL_EVENT))) {
             throw new ValidationException("Дата и время на которые намечено событие не может быть раньше, " +
                     "чем через два часа от текущего момента");
         }
@@ -103,7 +106,7 @@ public class EventServiceImpl implements EventService {
         }
         if (updateEventUserRequest.getEventDate() != null) {
             LocalDateTime newEventDate = updateEventUserRequest.getEventDate();
-            if (newEventDate.isBefore(LocalDateTime.now().plusHours(2))) {
+            if (newEventDate.isBefore(LocalDateTime.now().plusHours(MIN_HOURS_UNTIL_EVENT))) {
                 throw new ValidationException("Время события указано раньше, чем через два часа от текущего момента");
             }
             event.setEventDate(newEventDate);
@@ -218,8 +221,8 @@ public class EventServiceImpl implements EventService {
             throw new ValidationException("Невозможно изменить дату на уже наступившую");
         }
         if (event.getPublishedOn() != null
-                && event.getEventDate().isBefore(event.getPublishedOn().plusHours(1))) {
-            throw new ValidationException("Дата события должна быть не позднее, чем через 1 час после публикации.");
+                && event.getEventDate().isBefore(event.getPublishedOn().plusHours(MIN_HOURS_BEFORE_START))) {
+            throw new ValidationException("дата начала изменяемого события должна быть не ранее чем за час от даты публикации.");
         }
         updateIfNotNull(updateEventAdminRequest.getAnnotation(), event::setAnnotation);
         updateIfNotNull(updateEventAdminRequest.getDescription(), event::setDescription);

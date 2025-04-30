@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import ru.yandex.practicum.event.model.Location;
 import ru.yandex.practicum.event.model.StateAction;
 
@@ -14,7 +13,6 @@ import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @Getter
-@Setter
 @NoArgsConstructor
 public class UpdateEventUserRequest {
     @Size(min = 20, max = 2000)

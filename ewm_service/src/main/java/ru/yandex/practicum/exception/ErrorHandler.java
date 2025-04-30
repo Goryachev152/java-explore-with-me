@@ -37,4 +37,14 @@ public class ErrorHandler {
                 .status(HttpStatus.NOT_FOUND.toString())
                 .build();
     }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorResponse handleRunTimeException(final RuntimeException e) {
+        return ErrorResponse.builder()
+                .message(e.getMessage())
+                .reason("Неизвестная ошибка")
+                .status(HttpStatus.INTERNAL_SERVER_ERROR.toString())
+                .build();
+    }
 }

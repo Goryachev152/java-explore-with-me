@@ -1,9 +1,13 @@
 package ru.yandex.practicum.user.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Value;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Value
+@AllArgsConstructor
+@Getter
+@NoArgsConstructor
 @Builder(toBuilder = true)
 public class UserShortDto {
     Long id;

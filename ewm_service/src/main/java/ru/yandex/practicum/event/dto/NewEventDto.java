@@ -8,14 +8,12 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import ru.yandex.practicum.event.model.Location;
 
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @Getter
-@Setter
 @NoArgsConstructor
 public class NewEventDto {
     @NotBlank
