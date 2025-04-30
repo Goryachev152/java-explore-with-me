@@ -297,6 +297,9 @@ public class EventServiceImpl implements EventService {
                 .and(EventSpecification.sortBySortType(sort))
                 .and(EventSpecification.onlyPublished());
         Page<Event> events = eventRepository.findAll(specification, pageable);
+        ViewingRequestDto hit = new ViewingRequestDto("ewm-main-service", httpServletRequest.getRequestURI(),
+                httpServletRequest.getRemoteAddr(), LocalDateTime.now());
+        statsClient.addHit(hit);
         List<String> uris = events.stream()
                 .map(event -> "/events/" + event.getId())
                 .toList();

@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.ResultStatsDto;
 import ru.yandex.practicum.ViewingRequestDto;
+import ru.yandex.practicum.exception.ValidationException;
 import ru.yandex.practicum.model.Viewing;
 import ru.yandex.practicum.model.ViewingMapper;
 import ru.yandex.practicum.storage.StatsRepository;
@@ -30,6 +31,9 @@ public class StatsServiceImpl implements StatsService {
 
     @Override
     public List<ResultStatsDto> getStats(LocalDateTime start, LocalDateTime end, List<String> uris, Boolean unique) {
+        if (start.isAfter(end)) {
+            throw new ValidationException("Дата начала не может быть позже даты окончания");
+        }
         List<ResultStatsDto> resultList;
         if (Objects.isNull(uris) || uris.isEmpty()) {
             if (!unique) {
