@@ -13,6 +13,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://stats-db:5432/stats-db
       - SPRING_DATASOURCE_USERNAME=stats-db
       - SPRING_DATASOURCE_PASSWORD=stats-db
+      - JAVA_TOOL_OPTIONS=-Duser.timezone=Europe/Moscow
 
   stats-db:
     image: postgres:16.1
@@ -40,9 +41,10 @@ services:
     depends_on:
       - ewm-db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://ewm-db:5433/ewm-db
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://ewm-db:5432/ewm-db
       - SPRING_DATASOURCE_USERNAME=ewm-db
       - SPRING_DATASOURCE_PASSWORD=ewm-db
+      - JAVA_TOOL_OPTIONS=-Duser.timezone=Europe/Moscow
 
   ewm-db:
     image: postgres:16.1

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ru.yandex.practicum.ResultStatsDto;
 import ru.yandex.practicum.ViewingRequestDto;
+import ru.yandex.practicum.exception.ValidationException;
 import ru.yandex.practicum.service.StatsService;
 
 import java.time.LocalDateTime;
@@ -35,6 +36,13 @@ public class StatsController {
                                    @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
                                    @RequestParam(required = false) List<String> uris,
                                    @RequestParam(required = false, defaultValue = "false") Boolean unique) {
+        if (start.isBefore(LocalDateTime.of(-4712, 1, 1, 0, 0))) {
+            throw new ValidationException("Start date exceeds PostgreSQL minimum timestamp");
+        }
+
+        if (end.isAfter(LocalDateTime.of(294276, 12, 31, 23, 59, 59))) {
+            throw new ValidationException("End date exceeds PostgreSQL maximum timestamp");
+        }
         log.info("Received request with start={}, end={}, uris={}, unique={}", start, end, uris, unique);
         return statsService.getStats(start, end, uris, unique);
     }
