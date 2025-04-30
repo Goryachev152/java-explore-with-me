@@ -13,6 +13,7 @@ public class AppConfig {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
+
     @Bean
     public StatsClient getStatsClient(RestTemplate restTemplate, @Value("${stats-server.url}") String url) {
         return new StatsClient(restTemplate, url);
