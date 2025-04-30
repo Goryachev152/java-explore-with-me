@@ -1,18 +1,14 @@
 package ru.yandex.practicum.event.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Value;
 import ru.yandex.practicum.category.dto.CategoryDto;
 import ru.yandex.practicum.user.dto.UserShortDto;
 
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
-@Getter
-@NoArgsConstructor
+@Value
 @Builder(toBuilder = true)
 public class EventShortDto {
     String annotation;

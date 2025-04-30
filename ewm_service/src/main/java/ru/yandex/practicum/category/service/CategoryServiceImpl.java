@@ -56,7 +56,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryDto> getCategories(Integer from, Integer size) {
-        if (from <=0 || size <= 0) {
+        if (from < 0 || size < 0) {
             throw new ValidationException("Параметры from и size не могут быль отрицательным числом");
         }
         Pageable pageable = PageRequest.of(from / size, size);

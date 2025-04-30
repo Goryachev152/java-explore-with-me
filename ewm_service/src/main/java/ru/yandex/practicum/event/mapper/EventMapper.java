@@ -1,5 +1,6 @@
 package ru.yandex.practicum.event.mapper;
 
+import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -11,7 +12,7 @@ import ru.yandex.practicum.event.dto.NewEventDto;
 import ru.yandex.practicum.event.model.Event;
 import ru.yandex.practicum.event.model.Location;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING, builder = @Builder(disableBuilder = false))
 public interface EventMapper {
 
     @Mapping(target = "id", ignore = true)

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import ru.yandex.practicum.event.model.Location;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @NoArgsConstructor
+@Builder(toBuilder = true)
 public class UpdateEventUserRequest {
     @Size(min = 20, max = 2000)
     private String annotation;
@@ -27,7 +29,7 @@ public class UpdateEventUserRequest {
     @Min(0)
     private Integer participantLimit = 0;
     private Boolean requestModeration;
-    StateAction stateAction;
+    private StateAction stateAction;
     @Size(min = 3, max = 120)
-    String title;
+    private String title;
 }

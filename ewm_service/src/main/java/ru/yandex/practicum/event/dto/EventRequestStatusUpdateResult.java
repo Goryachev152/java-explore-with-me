@@ -1,16 +1,14 @@
 package ru.yandex.practicum.event.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
+import lombok.Value;
 import ru.yandex.practicum.request.dto.ParticipationRequestDto;
 
 import java.util.List;
 
-@AllArgsConstructor
-@Getter
-@NoArgsConstructor
+@Value
+@Builder(toBuilder = true)
 public class EventRequestStatusUpdateResult {
-    private List<ParticipationRequestDto> confirmedRequests;
-    private List<ParticipationRequestDto> rejectedRequests;
+    List<ParticipationRequestDto> confirmedRequests;
+    List<ParticipationRequestDto> rejectedRequests;
 }

@@ -208,7 +208,10 @@ public class EventServiceImpl implements EventService {
                 .toList();
         log.info("confirmedDtoList {}", confirmedDtoList.size());
         log.info("rejectedDtoList {}", rejectedDtoList.size());
-        return new EventRequestStatusUpdateResult(confirmedDtoList, rejectedDtoList);
+        return EventRequestStatusUpdateResult.builder()
+                .confirmedRequests(confirmedDtoList)
+                .rejectedRequests(rejectedDtoList)
+                .build();
     }
 
     @Transactional
