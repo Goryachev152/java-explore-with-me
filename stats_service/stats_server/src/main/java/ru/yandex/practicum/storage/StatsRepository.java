@@ -31,7 +31,7 @@ public interface StatsRepository extends JpaRepository<Viewing, Long> {
             "from Viewing as v " +
             "where v.viewingData between :start and :end and v.uri in :uris " +
             "group by v.app, v.uri " +
-            "order by count(distinct v.id) desc")
+            "order by count(v.id) desc")
     List<ResultStatsDto> findByListUrisFalseUnique(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end,
                                                    @Param("uris") List<String> uris);
 
