@@ -74,7 +74,7 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     @Override
     public void deleteCommentAdmin(Long commId) {
-        if(!commentRepository.existsById(commId)) {
+        if (!commentRepository.existsById(commId)) {
             throw new NotFoundException("Комментарий с id= " + commId + " не найден");
         }
         commentRepository.deleteById(commId);

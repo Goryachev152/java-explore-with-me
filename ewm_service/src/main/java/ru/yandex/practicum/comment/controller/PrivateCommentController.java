@@ -20,6 +20,7 @@ import ru.yandex.practicum.comment.service.CommentService;
 @RequiredArgsConstructor
 public class PrivateCommentController {
     private final CommentService commentService;
+
     @PostMapping("/users/{userId}/events/{eventId}/comments")
     @ResponseStatus(HttpStatus.CREATED)
     public CommentDto create(@PathVariable Long userId, @PathVariable Long eventId,
