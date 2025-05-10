@@ -6,6 +6,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
 import ru.yandex.practicum.category.model.Category;
+import ru.yandex.practicum.event.dto.EventCommentDto;
 import ru.yandex.practicum.event.dto.EventFullDto;
 import ru.yandex.practicum.event.dto.EventShortDto;
 import ru.yandex.practicum.event.dto.NewEventDto;
@@ -25,4 +26,6 @@ public interface EventMapper {
 
     @Mapping(target = "views", source = "views")
     EventShortDto toShortDto(Event event, Long views);
+
+    EventCommentDto toCommentDto(Event event);
 }
